@@ -5,14 +5,21 @@
     <p class="category">{{ product.category }}</p>
     <p class="price">{{ product.price }}</p>
     <p class="description">{{ product.description }}</p>
+    <button @click="handleAddToCart"> Add to Cart</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from "vue";
 import type { Product } from "@/types/product";
+import { useCartStore } from "@/stores/cart";
 
-defineProps<{ product: Product }>();
+const props = defineProps<{ product: Product }>();
+const cart = useCartStore();
+
+function handleAddToCart(){
+cart.addToCart(props.product)
+}
 </script>
 
 <style scoped>
